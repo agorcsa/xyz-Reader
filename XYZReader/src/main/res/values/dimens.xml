@@ -1,0 +1,23 @@
+<resources>
+    <!-- detail -->
+    <dimen name="detail_title_text_size">32sp</dimen>
+    <dimen name="detail_body_text_size">22sp</dimen>
+    <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
+    <dimen name="fab_elevation">2dp</dimen>
+    <dimen name="fab_press_translation_z">6dp</dimen>
+    <dimen name="fab_margin">24dp</dimen>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="expandedTitleMarginStart">60dp</dimen>
+    <dimen name="paddingBottomRV">28dp</dimen>
+    <dimen name="paddingTopRV">116dp</dimen>
+    <dimen name="appBarLayoutName">112dp</dimen>
+    <dimen name="elevation_big">8dp</dimen>
+    <dimen name="elevation_medium">6sp</dimen>
+    <dimen name="elevation_small">4dp</dimen>
+    <dimen name="elevation_very_small">2dp</dimen>
+    <dimen name="marginBottomImageView">10dp</dimen>
+    <dimen name="marginTopImageView">20dp</dimen>
+    <dimen name="widthImageButton">56dp</dimen>
+    <dimen name="cardViewHight">224dp</dimen>
+    <dimen name="padding">4dp</dimen>
+</resources>
