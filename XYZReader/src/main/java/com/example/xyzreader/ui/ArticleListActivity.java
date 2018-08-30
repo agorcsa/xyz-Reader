@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Typeface;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
@@ -55,6 +57,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = ArticleListActivity.class.toString();
+    private CoordinatorLayout mRootLayout;
     private Toolbar mToolbar;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private ProgressBar mProgressBar;
@@ -84,6 +87,8 @@ public class ArticleListActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
+        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         // Add ActionBar
         setSupportActionBar(mToolbar);
@@ -96,15 +101,30 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mTransitionPhoto = findViewById(R.id.thumbnail);
 
+        final Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/OpenSansCondensedLight.ttf");
+        mCollapsingToolbarLayout.setCollapsedTitleTypeface(tf);
+        mCollapsingToolbarLayout.setExpandedTitleTypeface(tf);
+
 
         // FAB
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(ArticleListActivity.this, "Fab button was clicked", Toast.LENGTH_SHORT).show();
-                // Snackbar at button click
-                Snackbar.make(mRecyclerView, "Let's add a new article", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                //Toast.makeText(ArticleListActivity.this, "New article was added", Toast.LENGTH_SHORT).show();
+
+                // Add a Snackbar in case of adding a new article
+                Snackbar snackbar = Snackbar
+                        .make(mRootLayout, "No internet connection!", Snackbar.LENGTH_LONG)
+                        // Add an action button
+                        .setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Snackbar snack = Snackbar.make(mRootLayout, "Internet connection regained", Snackbar.LENGTH_SHORT);
+                                snack.show();
+                            }
+                        });
+                snackbar.show();
             }
         });
 
